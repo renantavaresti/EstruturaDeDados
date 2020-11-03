@@ -28,6 +28,11 @@ public class VetorTeste {
 		
 		lista.remove(1);
 		System.out.println(lista);
+		
+		for(int i = 0; i < 300; i++) {
+			Aluno y = new Aluno("Joao " + i);
+			lista.adiciona(y);
+		}
 	}
 	
 }

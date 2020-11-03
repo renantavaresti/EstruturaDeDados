@@ -8,6 +8,8 @@ public class Vetor {
 	private int totalDeAlunos = 0; // aponta pra proximo indice vazio
 	
 	public void adiciona(Aluno aluno) {
+		this.garanteEspaco();
+		
 		this.alunos[totalDeAlunos] = aluno; // essa solucao leva tempo constante pois independente da quantidade de alunos
 		totalDeAlunos++;                    // ela leva menos tempo para adicionar no vetor... tempo constante!
 		
@@ -23,7 +25,18 @@ public class Vetor {
 		return posicao >= 0 && posicao <= totalDeAlunos;
 	}
 	
+	private void garanteEspaco() {
+		if(totalDeAlunos == alunos.length){
+			Aluno[] novoArray = new Aluno[alunos.length*2];
+			for(int i = 0; i < alunos.length; i++) {
+				novoArray[i] = alunos[i];
+			}
+			this.alunos = novoArray;
+		}
+	}
+	
 	public void adiciona(int posicao, Aluno aluno) { // metodo adiciona que adiciona em qualquer lugar na lista
+		this.garanteEspaco();
 		
 		if(!posicaoValida(posicao)) {
 			throw new IllegalArgumentException("Poiscao Inválida");
@@ -53,6 +66,7 @@ public class Vetor {
 		}
 		totalDeAlunos--;
 		this.alunos[totalDeAlunos] = null;
+		
 	}
 	
 	public boolean contem(Aluno aluno) {
